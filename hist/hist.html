@@ -56,25 +56,6 @@
         padding: 1px;
         overflow: hidden;
     }
-#agrega-registros{
-	width:45%;
-	border:5px solid #6F86DF;
-    height: 400px;
-    overflow: auto;
-    float: left;
-    margin-top: 2%;
-    margin-left: 2%;
-    
-}
-    #agrega-registros2{
-	width:45%;
-	border:5px solid #FF0000;
-    height: 400px;
-    overflow: auto;
-    margin-top: 2%;
-    margin-left: 55%;
-    
-}
     #select{
         width: 15%;
         margin-left: 2%;
@@ -92,11 +73,10 @@ input[type=text], select {
 }
 
 </style>
-<script src="../js/jquery.js"></script>
-<script src="../js/myjava.js"></script>
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
 <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../bootstrap/js/bootstrap.js"></script>
+<script src="../bootstrap/js/bootstrap.js"></script>    
 </head>
 <body>
         <h1><p>Proyecto de telemetría</p></h1>
@@ -123,15 +103,12 @@ input[type=text], select {
             <td>Desde:<input type="datetime-local" value="2018-10-01T12:00" min ="2018-10-01T00:00" id="bd-desde" /></td>
             <td>Hasta:<input type="datetime-local" id="bd-hasta"/></td>
             <td><button onclick = "refresh1();putcircle();" id="botn">Mostrar en el mapa</button></td>
-            <td><h7>Pulse de nuevo para filtrar por ubicación</h7></td>
+            
         </tr>
     </table>
     </section>
-    <div id="cont1">
-    <div id="agrega-registros"></div>
-    <div id="agrega-registros2"></div>
-    </div>
-    <div style="position: absolute;" id="map"></div>
+    <div id="map"></div>
+
     <script>
     	$('#bd-desde').on('change', function(){
 		var desde = $('#bd-desde').val();

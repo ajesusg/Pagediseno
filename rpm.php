@@ -9,17 +9,18 @@
         if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
         } 
-        $sql = "SELECT ID, Latitud, Longitud, Fecha, RPM FROM datosdiseno ORDER BY ID DESC LIMIT 1";
+        $sql = "SELECT  RPM FROM datosdiseno ORDER BY ID DESC LIMIT 1";
         $resultado1 = $conn->query($sql);
         $fila = mysqli_fetch_row($resultado1);
-        $fila4 = $fila[4];
-        $rpm = substr($fila4, -6);
+        $fila4 = $fila[0];
+        $rpm = $fila4;
         $quit = array (" ");
         $colc = array ("");
+        $rpm = str_replace($quit, $colc, $rpm);
+        $rpm = substr($rpm, -4);
         $rpm = hexdec($rpm);
         $rpm = $rpm/4;
-        $result1 = $fila[0]."\n".$fila[1]."\n".$fila[2]."\n".$fila[3]."\n".$rpm."\n";  
+        $result1 = $rpm."\n";  
         echo $result1;
-        
         $conn->close();      
 ?>

@@ -7,17 +7,52 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-<script async defer src="jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['RPM Auto1', 0]
+        ]);
+
+        var options = {
+          width: 400, height: 200,
+          redFrom: 3200, redTo: 4000,
+          yellowFrom:2800, yellowTo: 3200,
+          minorTicks: 5,
+          max: 4000
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+            var JSON = $.ajax({
+                url: "http://localhost/html/rpm.php",
+                dataType: 'json',
+                async: false}).responseText;
+                var Respuesta = jQuery.parseJSON(JSON);
+          data.setValue(0, 1, Respuesta);
+          chart.draw(data, options);
+        }, 7500);
+        
+      }
+    </script>       
 <style>
         body{
 	       background: #e6e6e6;
             }
         #map {
         height: 400px;  /* The height is 400 pixels */
-        width: 55%;  /* The width is the width of the web page */
-        margin-left: 20%;
-        float: center;
+        width: 50%;  /* The width is the width of the web page */
+        margin-left: 2%;
+        float: left;
         box-decoration-break: clone;
         
        }
@@ -72,7 +107,16 @@
         float: left;
         height: 20%;
     }
-    
+    #cont2{
+        padding: 1px;
+        overflow: hidden;
+    }
+    #chart_div{
+        width: 35%;
+        height: 350px;
+        float: left;
+        margin-left: 10%;
+    }
     
 </style>
 </head>
@@ -115,7 +159,10 @@
     </table>
     </div>
     </div>
-    <div id="map"></div>
+    <div id="cont2">
+        <div id="map"></div>
+        <div id="chart_div"></div>
+    </div>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD196xyXe5FjthDerv1TTlikZO6cJCdu9g&callback=initMap">
     </script>

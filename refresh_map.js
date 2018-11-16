@@ -29,6 +29,8 @@
              longElement.textContent = data1[2];
             var longElement = document.getElementById("fech1"); 
              longElement.textContent = data1[3];
+            var longElement = document.getElementById("rpm"); 
+             longElement.textContent = data1[4];
             refrescar_marcador(data1[1], data1[2]);
     }
         function refresh2(){
@@ -64,10 +66,10 @@
         mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         }
-
      function refrescar_marcador(latitude, longitude)
     {
-      miref1.push(new google.maps.LatLng(latitude, longitude));
+      var coor = new google.maps.LatLng(latitude, longitude);
+      miref1.push(coor);    
       polilinea();
       var marker = new google.maps.Marker({  // función de api para crear marcador
         position: new google.maps.LatLng(latitude, longitude), 
